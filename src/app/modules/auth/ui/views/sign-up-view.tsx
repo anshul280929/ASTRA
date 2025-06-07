@@ -4,6 +4,7 @@ import {zodResolver} from "@hookform/resolvers/zod"
 import {OctagonIcon } from "lucide-react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+import {FaGithub, FaGoogle} from "react-icons/fa";
 
 import { authClient } from "@/lib/auth-client";
 import { Input } from "@/components/ui/input";
@@ -18,9 +19,9 @@ import {
 } from "@/components/ui/form"
 import { Card, CardContent } from "@/components/ui/card"
 import {Alert, AlertTitle} from "@/components/ui/alert"
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import e from "express";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
     name: z.string().min(1, "Name is required"),
@@ -34,8 +35,9 @@ const formSchema = z.object({
 });
 
 export const SignUpView = () => {
+    const router=useRouter();
 
-    const router= useRouter();
+    
     const [error,setError]=useState<string|null>(null);
     const [pending,setPending]=useState(false);
 
@@ -58,11 +60,34 @@ export const SignUpView = () => {
                 name: data.name,
                 email: data.email,
                 password: data.password,
+                callbackURL: "/",
             },
             {
                 onSuccess: () => {
                     setPending(false);
                     router.push("/");
+                    
+                },
+                onError:({error})=> {
+                    setError(error.message || "An error occurred during sign up.");
+                }
+            }
+        )
+    }
+
+    const onSocial=(provider: "github" |"google") => {
+        setError(null);
+        setPending(true);
+
+        authClient.signIn.social(
+            {
+                provider: provider,
+                callbackURL: "/",
+            },
+            {
+                onSuccess: () => {
+                    setPending(false);
+                    
                 },
                 onError:({error})=> {
                     setError(error.message || "An error occurred during sign up.");
@@ -166,17 +191,19 @@ export const SignUpView = () => {
                                 <div className="grid grid-cols-2 gap-4">
                                         <Button
                                             disabled={pending}
+                                            onClick={() => onSocial("google")}
                                             variant="outline"
                                             className="w-full"
                                             type="button">
-                                                Google
+                                                <FaGoogle className="mr-2" />
                                         </Button>
                                         <Button
                                             disabled={pending}
+                                            onClick={() => onSocial("github")}
                                             variant="outline"
                                             className="w-full"
                                             type="button">
-                                                Github 
+                                                <FaGithub className="mr-2" />
                                         </Button>
                                     </div>
                                     <div className="text-center text-sm">
