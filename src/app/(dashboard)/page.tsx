@@ -1,5 +1,5 @@
 import { auth } from "@/lib/auth";
-import { HomeView } from "./modules/Home/ui/views/home-view";
+import { HomeView } from "../modules/Home/ui/views/home-view";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -11,8 +11,7 @@ const session = await auth.api.getSession({
 if (!session) {
   redirect("/sign-in");
 }
-  return 
-  <HomeView/>;
+  return <HomeView/>;
   
 }
 
