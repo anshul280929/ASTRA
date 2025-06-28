@@ -5,6 +5,9 @@ import {OctagonIcon } from "lucide-react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import {FaGithub, FaGoogle} from "react-icons/fa";
+import { useState } from "react";
+import e from "express";
+import { useRouter } from "next/navigation";
 
 import { authClient } from "@/lib/auth-client";
 import { Input } from "@/components/ui/input";
@@ -19,9 +22,6 @@ import {
 } from "@/components/ui/form"
 import { Card, CardContent } from "@/components/ui/card"
 import {Alert, AlertTitle} from "@/components/ui/alert"
-import { useState } from "react";
-import e from "express";
-import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
     name: z.string().min(1, "Name is required"),
@@ -99,7 +99,7 @@ export const SignUpView = () => {
 
     return(
         <div className="flex flex-col gap-6">
-            <Card className="overflow-hidden p-0">
+            <Card className="overflow-hidden p-0 bg-grey-100">
                 <CardContent className="grid p-0 md:grid-cols-2">
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)} className="p-6 md:p-8">
@@ -177,12 +177,12 @@ export const SignUpView = () => {
                                     </Alert>
                                 )}
 
-                                <Button disabled={pending} className="w-full" type="submit">
+                                <Button disabled={pending} className="w-full " type="submit">
                                     Sign Up
                                 </Button>
                                 <div className="after:border-border relative text-center text-sm after:absolute
                                  after-inset-0 after:top-1/2 after-flex after:z-0 after:items-center after:border-t">
-                                    <span className="bg-card text-muted-foreground relative z-10 px-2">
+                                    <span className="text-muted-foreground relative z-10 px-2">
                                         Or continue with
                                     </span>
 
@@ -207,19 +207,16 @@ export const SignUpView = () => {
                                         </Button>
                                     </div>
                                     <div className="text-center text-sm">
-                                        Already have an account?{" "}<Link href="/sign-in" className="font-medium">Sign In</Link>
+                                        Already have an account?{" "}<Link href="/sign-in" className="font-medium text-blue-700">Sign In</Link>
                                     </div>
                             </div>
 
                         </form>
                     </Form>
                    
-                   <div className="bg-radial from-green-700 to-green-900 relativce hidden md:flex flex-col
-                   gap-y-4 items-center justify-center">
-                    <img src="/logo.svg" alt="Logo" className="h-[92px] w-[92px]"></img>
-                    <p className="text-2xl font-semibold text-white">
-                        ASTRA
-                    </p>
+                   <div className="bg-white relativce hidden md:flex flex-col
+                   gap-y-4 items-center justify-center width">
+                    <img src="/logo.svg" alt="Logo" className="h-[218px] w-[218px]"></img>
                    </div>
                 </CardContent>
                 
