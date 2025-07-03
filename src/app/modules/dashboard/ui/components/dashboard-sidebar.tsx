@@ -63,18 +63,20 @@ export const DashboardSidebar = () => {
     const pathname = usePathname();
     return(
         <Sidebar>
+             
             <SidebarHeader className="text-sidebar-accent-foreground">
                 <Link href="/" className="flex items-center gap-2">
                     <Image src="/logo.svg" height={170} width={170} alt="ASTRA"/>
                         
                 </Link>                  
             </SidebarHeader>
-
+            
             <div>
                 <Separator className="my-2" />
             </div>
-
+            
             <SidebarContent>
+                
                 <SidebarGroup>
                     <SidebarGroupContent>
                         <SidebarMenu>
@@ -102,11 +104,11 @@ export const DashboardSidebar = () => {
                     </SidebarGroupContent>
                 </SidebarGroup>
             </SidebarContent>
-
+            
             <SidebarFooter className="text-white">
+            
                 <DashboardUserButton />
             </SidebarFooter>
-                
         </Sidebar>
     )
 };
