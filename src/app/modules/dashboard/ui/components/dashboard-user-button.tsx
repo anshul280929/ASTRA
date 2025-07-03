@@ -54,7 +54,7 @@ export const DashboardUserButton=()=>{
                         {data.user.email}
                     </p>
                 </div>
-                <ChevronDownIcon className="size-4 shrink-0"/>
+                <ChevronDownIcon className="size-4 shrink-0 text-black"/>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" side="right" className="w-72">
                 <DropdownMenuLabel>
